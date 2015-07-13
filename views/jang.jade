@@ -1,0 +1,52 @@
+extends layout
+
+block content
+    .site-wrapper
+        .site-wrapper-inner
+            .cover-container
+                .masthead.clearfix
+                    .inner
+                        h3.masthead-brand
+                            span(style='margin-right:5px;').glyphicon.glyphicon-refresh
+                            = title
+
+                .inner.cover
+                    h1.cover-heading Emiter
+                        small(style='margin-left:10px;') Currently connected:
+                            span(style='margin-left:7px;')#currConnectedCnt= currConnectedCnt
+                        if lastMessage
+                            div(style='margin-top:15px;')#lastMessageContainer
+                                p.lead
+                                    strong Last message:
+                                p.lead
+                                    h2.bg-primary#lastMessage
+                                        != lastMessage
+                        else
+                            #lastMessageContainer.hide
+                                p.lead
+                                    strong Last message:
+                                p.lead
+                                    h2.bg-primary#lastMessage
+
+                        hr
+                        p.lead Please welcome to send message to every connected clients.
+                        p.lead
+                            form(action='#', method='POST')#sendMsgForm
+                                .form-group
+                                    label(for='msg').sr-only Message content
+                                    //textarea(name='msg', placeholder='Type message...', required).form-control#msg
+                                    input(type='text' name='msg', placeholder='Type message...', required).form-control#msg
+                                button(type='submit').btn.btn-lg.btn-danger Send Message
+                                    span(style='margin-left:7px;').glyphicon.glyphicon-send
+                        hr
+                        p.lead
+                            form(action='#', method='POST')#sendGongForm
+                                button(type='submit').btn.btn-lg.btn-success Make them hear you!
+                                    span(style='margin-left:7px;').glyphicon.glyphicon-bell
+
+                .mastfoot
+                    .inner
+                        p.text-info miniq & ropsiU
+
+block scripts
+    script(type='text/javascript', src='/js/jang.js')
