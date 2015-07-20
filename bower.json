@@ -1,0 +1,32 @@
+{
+  "name": "jing",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5",
+    "socket.io-client": "0.9.x"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/!(variables).less", "dist/fonts/*", "dist/js/*", "dist/css/*"
+      ]
+    },
+	"jquery": {
+		"main": [
+			"dist/*"
+		]
+	},
+	"socket.io-client": {
+		"main": [
+			"dist/*.js"
+		]
+	}
+  }
+}
