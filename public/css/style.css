@@ -163,5 +163,34 @@ body {
 }
 
 body.jigsaw {
-    background: url('../images/jigsaw.jpg') 50% 50% #000;
+    background: url('../images/jigsaw.jpg') 50% 50% #000 no-repeat;
+}
+
+body.startDemo {
+    background: #300;
+}
+
+body.endDemo {
+    background: #030;
+}
+
+#msgList li {
+    color: #999;
+    font-size: 150%;
+}
+
+#msgList li.bg-primary,
+#msgList li.bg-danger,
+#msgList li.bg-success
+{
+    color: #fff;
+    font-size: 220%;
+}
+
+#msgList li.bg-danger {
+    background-color: #a00;
+}
+
+#msgList li.bg-success {
+    background-color: #0a0;
 }

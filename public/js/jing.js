@@ -1,10 +1,28 @@
 io = io.connect();
 
-function appendMessage(msgList, msg) {
+function appendMessage(msgList, msg, msgClass) {
+    msgClass = msgClass || 'bg-primary';
+    
     msgList.find('li').each(function(){
-        $(this).removeClass('bg-primary');
+        $(this).removeClass();
     });
-    msgList.append('<li class="bg-primary">' + msg + '</li>');
+    msgList.append('<li class="' + msgClass + '">' + msg + '</li>');
+}
+
+function fixMessagesList(msgList) {
+    var li = msgList.find('li');        
+    if(li.length > messagesListLength) {
+        var fli = msgList.find('li:nth-child(' + (li.length - messagesListLength) + ')');
+        fli.hide('slow', function() {
+            $(this).remove();
+        });
+    }
+}
+
+function unhideMessagesList(msgList) {
+    if(msgList.hasClass('hide')) {
+        msgList.removeClass('hide');
+    }
 }
 
 $(function(){
@@ -26,29 +44,44 @@ $(function(){
     
     // you get message
     io.on('msgget', function(data) {
-        //---8<--- TO REMOVE!!!
-        $('body').removeClass('jigsaw');
-        //--->8--- TO REMOVE!!!
-        var msgList = $('#msgList'), cDate = new Date(), li;
+        $('body').removeClass();
                 
-        if(msgList.hasClass('hide')) {
-            msgList.removeClass('hide');
-        }
+        var msgList = $('#msgList');
+                
+        unhideMessagesList(msgList);
         
         appendMessage(msgList, data.message);
         play('yoshiSound');
-        li = msgList.find('li');        
-        if(li.length > 3) {
-            var fli = msgList.find('li:nth-child(' + (li.length - 3) + ')');
-            fli.hide('slow', function() {
-                $(this).remove();
-            });
-        }
+        fixMessagesList(msgList);
     });
     
     // you get message
     io.on('gongget', function(data) {
         $('body').addClass('jigsaw');
         play('jigsawSound');
+    });
+    
+    io.on('startDemoGet', function(data) {
+        $('body').removeClass();
+        $('body').addClass('startDemo');
+        
+        var msgList = $('#msgList');
+        unhideMessagesList(msgList);
+        appendMessage(msgList, data.message, 'bg-danger');
+        play('hurryUpSound');
+        fixMessagesList(msgList);
+        
+    });
+    
+    io.on('endDemoGet', function(data) {
+        $('body').removeClass();
+        $('body').addClass('endDemo');
+        
+        var msgList = $('#msgList');
+        unhideMessagesList(msgList);
+        appendMessage(msgList, data.message, 'bg-success');
+        play('stageClearSound');
+        fixMessagesList(msgList);
+        
     });
 });

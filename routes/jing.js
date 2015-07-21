@@ -6,6 +6,7 @@ router.get('/', function (req, res, next) {
     res.render('jing', {
         title: 'Receivier - Jing Jang'
         , messages: req.app.get('messages') || []
+        , messagesListLength: req.app.get('messagesListLength') || 10
     });
 });
 

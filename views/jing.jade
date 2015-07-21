@@ -11,7 +11,7 @@ block content
                             = title
 
                 .inner.cover
-                    h1.cover-heading Receivier
+                    h2 Recently received messages:
                     ul.list-unstyled.hide#msgList
 
                 .mastfoot
@@ -21,7 +21,10 @@ block content
 block scripts
     audio(src='fx/yoshi.mp3' preload='auto')#yoshiSound
     audio(src='fx/jigsaw.mp3' preload='auto')#jigsawSound
+    audio(src='fx/hurry_up.mp3' preload='auto')#hurryUpSound
+    audio(src='fx/stage_clear.mp3' preload='auto')#stageClearSound
 
     script(type='text/javascript').
         var messages = !{JSON.stringify(messages)};
+        var messagesListLength = #{messagesListLength};
     script(type='text/javascript', src='/js/jing.js')
