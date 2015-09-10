@@ -10,6 +10,20 @@ router.get('/', function (req, res, next) {
         title: 'Emiter - Jing Jang'
         , 'currConnectedCnt': (req.app.get('currConnectedCnt') || 0)
         , 'lastMessage': (messages.length ? messages[messages.length - 1] : '')
+        , 'teamList': [
+            {
+                name: "team1",
+                selected: false
+            }
+            ,{
+                name: "team2",
+                selected: false
+            }
+            ,{
+                name: "team3",
+                selected: false
+            }
+        ]
     });
 });
 

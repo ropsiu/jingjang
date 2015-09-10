@@ -48,6 +48,11 @@ block content
                             .container-fluid
                                 .row
                                     .col-md-6
+                                        label(for='selected_team_id') Select Team:
+                                    .col-md-6
+                                        select(id='selected_team_id', name='selected_team_id')
+                                .row
+                                    .col-md-6
                                         form(action='#', method='POST')#startDemoForm
                                             button(type='submit').btn.btn-lg.btn-danger We're starting! Hurry up! 
                                                 span(style='margin-left:7px;').glyphicon.glyphicon-time
@@ -61,4 +66,17 @@ block content
                         p.text-info miniq & ropsiU
 
 block scripts
+    script.
+        var teamList = !{JSON.stringify(teamList)};
+        $(function(){
+            alert(teamList);
+            $.each(teamList, function(key,item) {
+                var option,
+                    select = $('#selected_team_id');
+                if(item.hasOwnProperty('name')) {
+                    option = new Option(item.name, item.name, false, false);
+                    select.append(option);
+                }
+            });
+        });
     script(type='text/javascript', src='/js/jang.js')
