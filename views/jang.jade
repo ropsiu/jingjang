@@ -29,16 +29,6 @@ block content
                                     h2.bg-primary#lastMessage
 
                         hr
-                        p.lead Send message with name of your team and what time you will start demo.
-                        p.lead
-                            form(action='#', method='POST')#sendMsgForm
-                                .form-group
-                                    label(for='msg').sr-only Message content
-                                    //textarea(name='msg', placeholder='Type message...', required).form-control#msg
-                                    input(type='text' name='msg', placeholder='Type message...', required).form-control#msg
-                                button(type='submit').btn.btn-lg.btn-primary Send Message
-                                    span(style='margin-left:7px;').glyphicon.glyphicon-send
-                        hr
                         p.lead
                             form(action='#', method='POST')#sendGongForm.hide
                                 button(type='submit').btn.btn-lg.btn-success Make them hear you!
@@ -47,10 +37,11 @@ block content
                         p.lead Send information about demo status
                             .container-fluid
                                 .row
-                                    .col-md-6
-                                        label(for='selected_team_id') Select Team:
-                                    .col-md-6
-                                        select(id='selected_team_id', name='selected_team_id')
+                                    .col-md-12
+                                        form(action='#', method='POST')#currentTeamForm
+                                            .form-group
+                                                label(for='selected_team_id').input-lg Current Team:
+                                                select(id='selected_team_id', name='selected_team_id').input-lg.text-info
                                 .row
                                     .col-md-6
                                         form(action='#', method='POST')#startDemoForm
@@ -60,21 +51,36 @@ block content
                                         form(action='#', method='POST')#endDemoForm
                                             button(type='submit').btn.btn-lg.btn-success We have done.
                                                 span(style='margin-left:7px;').glyphicon.glyphicon-thumbs-up
-
+                        hr
+                        p.lead Send message with name of your team and what time you will start demo.
+                        p.lead
+                            .container-fluid
+                                .row
+                                    .col-md-12
+                                        form(action='#', method='POST')#sendMsgForm
+                                            .form-group
+                                                label(for='msg').sr-only Message content
+                                                //textarea(name='msg', placeholder='Type message...', required).form-control#msg
+                                                input(type='text' name='msg', placeholder='Type message...', required).input-lg.text-info#msg
+                                            button(type='submit').btn.btn-lg.btn-primary Send Message
+                                                span(style='margin-left:7px;').glyphicon.glyphicon-send
                 .mastfoot
                     .inner
-                        p.text-info miniq & ropsiU & bąk
+                        p.text-info miniq & ropsiU & bąku
 
 block scripts
     script.
         var teamList = !{JSON.stringify(teamList)};
-        $(function(){
-            alert(teamList);
-            $.each(teamList, function(key,item) {
+        $(function () {
+            $.each(teamList, function (key, item) {
                 var option,
-                    select = $('#selected_team_id');
-                if(item.hasOwnProperty('name')) {
-                    option = new Option(item.name, item.name, false, false);
+                        select = $('#selected_team_id'),
+                        selected = false;
+                if (item.hasOwnProperty('name')) {
+                    if (item.hasOwnProperty('selected') && item.selected) {
+                        selected = true;
+                    }
+                    option = new Option(item.name, item.name, false, selected);
                     select.append(option);
                 }
             });

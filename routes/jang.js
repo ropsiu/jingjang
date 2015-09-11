@@ -17,7 +17,7 @@ router.get('/', function (req, res, next) {
             }
             ,{
                 name: "team2",
-                selected: false
+                selected: true
             }
             ,{
                 name: "team3",
