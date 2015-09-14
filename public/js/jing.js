@@ -68,7 +68,7 @@ $(function(){
         var msgList = $('#msgList');
         unhideMessagesList(msgList);
         appendMessage(msgList, data.message, 'bg-danger');
-        play('hurryUpSound');
+        playAudioFile(data.audioFile);
         fixMessagesList(msgList);
         
     });
@@ -80,7 +80,7 @@ $(function(){
         var msgList = $('#msgList');
         unhideMessagesList(msgList);
         appendMessage(msgList, data.message, 'bg-success');
-        play('stageClearSound');
+        playAudioFile(data.audioFile);
         fixMessagesList(msgList);
         
     });

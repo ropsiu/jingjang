@@ -5,5 +5,10 @@ Date.prototype.now = function() {
 };
 
 function play(tag) {
-    document.getElementById(tag).play();
+    document.getElementById('audioFile').play();
+}
+
+function playAudioFile(audioFile) {
+    var audio = new Audio('/jingles/' + audioFile);
+    audio.play();
 }

@@ -40,8 +40,8 @@ block content
                                     .col-md-12
                                         form(action='#', method='POST')#currentTeamForm
                                             .form-group
-                                                label(for='selected_team_id').input-lg Current Team:
-                                                select(id='selected_team_id', name='selected_team_id').input-lg.text-info
+                                                label(for='currentTeamId').input-lg Current Team:
+                                                select(id='currentTeamId', name='currentTeamId').input-lg.text-info
                                 .row
                                     .col-md-6
                                         form(action='#', method='POST')#startDemoForm
@@ -60,7 +60,6 @@ block content
                                         form(action='#', method='POST')#sendMsgForm
                                             .form-group
                                                 label(for='msg').sr-only Message content
-                                                //textarea(name='msg', placeholder='Type message...', required).form-control#msg
                                                 input(type='text' name='msg', placeholder='Type message...', required).input-lg.text-info#msg
                                             button(type='submit').btn.btn-lg.btn-primary Send Message
                                                 span(style='margin-left:7px;').glyphicon.glyphicon-send
@@ -74,13 +73,13 @@ block scripts
         $(function () {
             $.each(teamList, function (key, item) {
                 var option,
-                        select = $('#selected_team_id'),
+                        select = $('#currentTeamId'),
                         selected = false;
-                if (item.hasOwnProperty('name')) {
+                if (item.hasOwnProperty('name') && item.hasOwnProperty('id')) {
                     if (item.hasOwnProperty('selected') && item.selected) {
                         selected = true;
                     }
-                    option = new Option(item.name, item.name, false, selected);
+                    option = new Option(item.name, item.id, false, selected);
                     select.append(option);
                 }
             });

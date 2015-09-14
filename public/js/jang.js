@@ -32,12 +32,18 @@ $(function () {
     
     $('#startDemoForm').on('submit', function (e) {
         e.preventDefault();
-        var msgField = $(this).find('#msg');
+        var currentTeamId = $('#currentTeamId').val();
+        var currentTeamName = $("#currentTeamId option[value='" + currentTeamId + "']").text();
         var lmc = $('#lastMessageContainer');
         var cDate = new Date();
         
-        msg = (cDate.now()) + ' <strong>We\'re starting! Hurry up!</strong>';
-        io.emit('startDemoSend', msg);
+        msg = (cDate.now()) + ' [<span class="teamName">' + currentTeamName + '</span>] <strong>We\'re starting! Hurry up!</strong>';
+        var resp = {
+            "message": msg,
+            "currentTeamId": currentTeamId
+        };
+        
+        io.emit('startDemoSend', resp);
         if (lmc.hasClass('hide')) {
             lmc.removeClass('hide');
         }
@@ -50,12 +56,18 @@ $(function () {
     
     $('#endDemoForm').on('submit', function (e) {
         e.preventDefault();
+        var currentTeamId = $('#currentTeamId').val();
+        var currentTeamName = $("#currentTeamId option[value='" + currentTeamId + "']").text();
         var msgField = $(this).find('#msg');
         var lmc = $('#lastMessageContainer');
         var cDate = new Date();
         
-        msg = (cDate.now()) + ' <strong>We have done.</strong>';
-        io.emit('endDemoSend', msg);
+        msg = (cDate.now()) + ' [<span class="teamName">' + currentTeamName + '</span>] <strong>We have done.</strong>';
+        var resp = {
+            "message": msg,
+            "currentTeamId": currentTeamId
+        };
+        io.emit('endDemoSend', resp);
         if (lmc.hasClass('hide')) {
             lmc.removeClass('hide');
         }
